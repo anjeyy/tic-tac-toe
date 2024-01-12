@@ -15,4 +15,9 @@ class FirstPlayer implements Player {
     public String icon() {
         return ICON;
     }
+
+    @Override
+    public void decideNextDrawing(int row, int column) {
+
+    }
 }

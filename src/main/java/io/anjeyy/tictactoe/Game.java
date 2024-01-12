@@ -1,10 +1,10 @@
 package io.anjeyy.tictactoe;
 
+import io.anjeyy.tictactoe.player.Player;
+
 public class Game {
 
-    private final String[] firstRow = new String[3];
-    private final String[] secondRow = new String[3];
-    private final String[] thirdRow = new String[3];
+    private final String[][] board = new String[3][3];
 
     private Game() {
     }
@@ -14,10 +14,17 @@ public class Game {
     }
 
     public String[][] showBoard() {
-        return new String[][] { firstRow, secondRow, thirdRow };
+        return board;
     }
 
     public boolean isGameOver() {
         return false;
+    }
+
+    public void draw(Player player, Coordinate coordinate) {
+        int row = coordinate.row();
+        int column = coordinate.column();
+
+        board[row - 1][column - 1] = player.icon();
     }
 }

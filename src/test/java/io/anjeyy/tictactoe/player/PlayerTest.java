@@ -8,11 +8,6 @@ import org.junit.jupiter.api.Test;
 
 class PlayerTest {
 
-    /*
-     * TDD list
-     * - player factory
-     */
-
     @Test
     void testPlayerIcons() {
         Player firstPlayer = PlayerFactory.createFirstPlayer();
