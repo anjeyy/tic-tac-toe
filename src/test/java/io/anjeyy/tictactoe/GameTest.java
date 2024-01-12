@@ -3,6 +3,7 @@ package io.anjeyy.tictactoe;
 import io.anjeyy.tictactoe.player.Player;
 import io.anjeyy.tictactoe.player.PlayerFactory;
 import org.assertj.core.api.Assertions;
+import org.assertj.core.api.ThrowableAssert;
 import org.assertj.core.data.Index;
 import org.junit.jupiter.api.Test;
 
@@ -31,12 +32,11 @@ class GameTest {
         Game game = Game.start();
         Player firstPlayer = PlayerFactory.createFirstPlayer();
         firstPlayer.decideNextDrawing(1, 1);
-        Coordinate firstCoordinates = Coordinate.from(1, 1);
-        game.draw(firstPlayer, firstCoordinates);
+        game.draw(firstPlayer);
 
         Player secondPlayer = PlayerFactory.createSecondPlayer();
-        Coordinate secondCoordinates = Coordinate.from(2, 1);
-        game.draw(secondPlayer, secondCoordinates);
+        secondPlayer.decideNextDrawing(2, 1);
+        game.draw(secondPlayer);
 
         String[][] actual = game.showBoard();
         Assertions.assertThat(actual)
@@ -45,6 +45,16 @@ class GameTest {
             .contains(new String[3], Index.atIndex(2));
     }
 
-    //memo - possible columns to draw -> ENUM
+    @Test
+    void testMissingDrawing() {
+        Game game = Game.start();
+        Player firstPlayer = PlayerFactory.createFirstPlayer();
+
+        ThrowableAssert.ThrowingCallable expectedThrow = () -> game.draw(firstPlayer);
+
+        Assertions.assertThatThrownBy(expectedThrow)
+            .isInstanceOf(IllegalStateException.class)
+            .hasMessage("Player needs to make a decision where to draw.");
+    }
 
 }

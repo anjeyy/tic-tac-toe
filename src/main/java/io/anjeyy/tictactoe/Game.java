@@ -21,7 +21,11 @@ public class Game {
         return false;
     }
 
-    public void draw(Player player, Coordinate coordinate) {
+    public void draw(Player player) {
+        Coordinate coordinate = player.drawingDecision();
+        if (coordinate == null) {
+            throw new IllegalStateException("Player needs to make a decision where to draw.");
+        }
         int row = coordinate.row();
         int column = coordinate.column();
 
