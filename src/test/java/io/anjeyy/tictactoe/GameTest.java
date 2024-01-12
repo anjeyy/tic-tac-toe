@@ -15,7 +15,7 @@ class GameTest {
     }
 
     @Test
-    void testGameOver() {
+    void testEmptyGameOver() {
         Game game = Game.start();
 
         boolean actual = game.isGameOver();
