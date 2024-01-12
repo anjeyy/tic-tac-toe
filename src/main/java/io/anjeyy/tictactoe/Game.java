@@ -6,15 +6,18 @@ public class Game {
     private final String[] secondRow = new String[3];
     private final String[] thirdRow = new String[3];
 
-    private Game(){
-
+    private Game() {
     }
 
-    public static Game start(){
+    public static Game start() {
         return new Game();
     }
 
     public String[][] showBoard() {
-        return new String[][]{firstRow, secondRow, thirdRow};
+        return new String[][] { firstRow, secondRow, thirdRow };
+    }
+
+    public boolean isGameOver() {
+        return false;
     }
 }

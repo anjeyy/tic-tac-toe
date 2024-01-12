@@ -13,4 +13,14 @@ class GameTest {
 
         Assertions.assertThat(actual).hasDimensions(3, 3);
     }
+
+    @Test
+    void testGameOver() {
+        Game game = Game.start();
+
+        boolean actual = game.isGameOver();
+
+        Assertions.assertThat(actual).isFalse();
+    }
+
 }
