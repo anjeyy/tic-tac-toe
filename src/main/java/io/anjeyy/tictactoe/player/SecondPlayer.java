@@ -1,13 +1,8 @@
 package io.anjeyy.tictactoe.player;
 
-import io.anjeyy.tictactoe.Coordinate;
-
-import java.util.Optional;
-
-class SecondPlayer implements Player {
+class SecondPlayer extends AbstractPlayer {
 
     private static final String ICON = "O";
-    private Coordinate nextDrawing = null;
 
     private SecondPlayer() {
     }
@@ -19,15 +14,5 @@ class SecondPlayer implements Player {
     @Override
     public String icon() {
         return ICON;
-    }
-
-    @Override
-    public void decideNextDrawing(int row, int column) {
-        nextDrawing = Coordinate.from(row, column);
-    }
-
-    @Override
-    public Optional<Coordinate> drawingDecision() {
-        return Optional.ofNullable(nextDrawing);
     }
 }
