@@ -15,4 +15,9 @@ class SecondPlayer extends AbstractPlayer {
     public String icon() {
         return ICON;
     }
+
+    @Override
+    public String toString() {
+        return "Player 2: O";
+    }
 }

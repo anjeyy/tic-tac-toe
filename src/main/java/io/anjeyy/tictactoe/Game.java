@@ -20,7 +20,17 @@ public class Game {
     }
 
     public boolean isGameOver() {
-        return false;
+        String[] firstRow = board[0];
+        String firstRowCell = firstRow[0];
+        if (firstRowCell == null) {
+            return false;
+        }
+        for (String cell : firstRow) {
+            if (!cell.equals(firstRowCell)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void draw(Player player) {

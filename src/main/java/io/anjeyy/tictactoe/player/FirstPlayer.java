@@ -17,4 +17,8 @@ class FirstPlayer extends AbstractPlayer {
         return ICON;
     }
 
+    @Override
+    public String toString() {
+        return "Player 1: X";
+    }
 }

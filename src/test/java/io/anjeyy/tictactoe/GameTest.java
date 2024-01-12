@@ -28,24 +28,6 @@ class GameTest {
     }
 
     @Test
-    void testFirstDrawing() {
-        Game game = Game.start();
-        Player firstPlayer = PlayerFactory.createFirstPlayer();
-        firstPlayer.decideNextDrawing(1, 1);
-        game.draw(firstPlayer);
-
-        Player secondPlayer = PlayerFactory.createSecondPlayer();
-        secondPlayer.decideNextDrawing(2, 1);
-        game.draw(secondPlayer);
-
-        String[][] actual = game.showBoard();
-        Assertions.assertThat(actual)
-            .contains(new String[] { "X", null, null }, Index.atIndex(0))
-            .contains(new String[] { "O", null, null }, Index.atIndex(1))
-            .contains(new String[3], Index.atIndex(2));
-    }
-
-    @Test
     void testMissingDrawing() {
         Game game = Game.start();
         Player firstPlayer = PlayerFactory.createFirstPlayer();
@@ -56,5 +38,37 @@ class GameTest {
             .isInstanceOf(IllegalStateException.class)
             .hasMessage("Player needs to make a decision where to draw.");
     }
+
+    @Test
+    void testRowGameOver() {
+        Game game = Game.start();
+        Player firstPlayer = PlayerFactory.createFirstPlayer();
+        Player secondPlayer = PlayerFactory.createSecondPlayer();
+
+        firstPlayer.decideNextDrawing(1, 1);
+        game.draw(firstPlayer);
+        secondPlayer.decideNextDrawing(2, 1);
+        game.draw(secondPlayer);
+
+        firstPlayer.decideNextDrawing(1, 2);
+        game.draw(firstPlayer);
+        secondPlayer.decideNextDrawing(2, 2);
+        game.draw(secondPlayer);
+
+        firstPlayer.decideNextDrawing(1, 3);
+        game.draw(firstPlayer);
+
+        String[][] actual = game.showBoard();
+        Assertions.assertThat(actual)
+            .contains(new String[] { "X", "X", "X" }, Index.atIndex(0))
+            .contains(new String[] { "O", "O", null }, Index.atIndex(1))
+            .contains(new String[3], Index.atIndex(2));
+        boolean isGameOver = game.isGameOver();
+        Assertions.assertThat(isGameOver).isTrue();
+    }
+
+    //memo test drawing same cell
+    //memo test drawing after game is over
+    //memo test winner of game
 
 }
