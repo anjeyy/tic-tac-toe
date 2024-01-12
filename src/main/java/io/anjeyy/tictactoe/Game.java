@@ -2,6 +2,8 @@ package io.anjeyy.tictactoe;
 
 import io.anjeyy.tictactoe.player.Player;
 
+import java.util.Optional;
+
 public class Game {
 
     private final String[][] board = new String[3][3];
@@ -22,10 +24,7 @@ public class Game {
     }
 
     public void draw(Player player) {
-        Coordinate coordinate = player.drawingDecision();
-        if (coordinate == null) {
-            throw new IllegalStateException("Player needs to make a decision where to draw.");
-        }
+        Coordinate coordinate = player.drawingDecision().orElseThrow(() -> new IllegalStateException("Player needs to make a decision where to draw."));
         int row = coordinate.row();
         int column = coordinate.column();
 

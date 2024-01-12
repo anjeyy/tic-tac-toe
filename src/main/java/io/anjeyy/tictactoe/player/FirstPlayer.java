@@ -2,6 +2,8 @@ package io.anjeyy.tictactoe.player;
 
 import io.anjeyy.tictactoe.Coordinate;
 
+import java.util.Optional;
+
 class FirstPlayer implements Player {
 
     private static final String ICON = "X";
@@ -25,8 +27,8 @@ class FirstPlayer implements Player {
     }
 
     @Override
-    public Coordinate drawingDecision() {
-        return nextDrawing;
+    public Optional<Coordinate> drawingDecision() {
+        return Optional.ofNullable(nextDrawing);
     }
 
 }
