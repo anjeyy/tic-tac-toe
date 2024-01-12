@@ -5,11 +5,14 @@ import org.junit.jupiter.api.Test;
 
 class PlayerTest {
 
-    //memo create interface and two implementations of it!
+    /*
+     * TDD list
+     * - player interface
+     */
 
     @Test
-    void testPlayerIcon() {
-        FirstPlayer firstPlayer = FirstPlayer.create();
+    void testPlayerIcons() {
+        Player firstPlayer = FirstPlayer.create();
 
         String actual = firstPlayer.icon();
 
@@ -18,9 +21,9 @@ class PlayerTest {
 
     @Test
     void testAlternativePlayerIcon() {
-        SecondPlayer playerFactory = SecondPlayer.create();
+        Player secondPlayer = SecondPlayer.create();
 
-        String actual = playerFactory.icon();
+        String actual = secondPlayer.icon();
 
         Assertions.assertThat(actual).isEqualTo("O");
     }

@@ -1,6 +1,6 @@
 package io.anjeyy.tictactoe;
 
-public class SecondPlayer {
+public class SecondPlayer implements Player {
 
     private final String icon;
 
@@ -12,6 +12,7 @@ public class SecondPlayer {
         return new SecondPlayer("O");
     }
 
+    @Override
     public String icon() {
         return icon;
     }
