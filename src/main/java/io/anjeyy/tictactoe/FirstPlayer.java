@@ -2,14 +2,13 @@ package io.anjeyy.tictactoe;
 
 public class FirstPlayer implements Player {
 
-    private final String icon;
+    private final String icon = "X";
 
-    private FirstPlayer(String icon) {
-        this.icon = icon;
+    private FirstPlayer() {
     }
 
     public static FirstPlayer create() {
-        return new FirstPlayer("X");
+        return new FirstPlayer();
     }
 
     @Override
