@@ -9,16 +9,16 @@ class PlayerTest {
 
     @Test
     void testPlayerIcon() {
-        FirstPlayer playerFactory = FirstPlayer.createFirst();
+        FirstPlayer firstPlayer = FirstPlayer.create();
 
-        String actual = playerFactory.icon();
+        String actual = firstPlayer.icon();
 
         Assertions.assertThat(actual).isEqualTo("X");
     }
 
     @Test
     void testAlternativePlayerIcon() {
-        FirstPlayer playerFactory = FirstPlayer.createSecond();
+        SecondPlayer playerFactory = SecondPlayer.create();
 
         String actual = playerFactory.icon();
 

@@ -1,15 +1,15 @@
 package io.anjeyy.tictactoe;
 
-public class FirstPlayer {
+public class SecondPlayer {
 
     private final String icon;
 
-    private FirstPlayer(String icon) {
+    private SecondPlayer(String icon) {
         this.icon = icon;
     }
 
-    public static FirstPlayer create() {
-        return new FirstPlayer("X");
+    public static SecondPlayer create() {
+        return new SecondPlayer("O");
     }
 
     public String icon() {
