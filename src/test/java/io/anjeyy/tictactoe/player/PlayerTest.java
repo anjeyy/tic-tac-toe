@@ -24,7 +24,7 @@ class PlayerTest {
 
     @Test
     void testAlternativePlayerIcon() {
-        Player secondPlayer = SecondPlayer.create();
+        Player secondPlayer = PlayerFactory.createSecondPlayer();
 
         String actual = secondPlayer.icon();
 

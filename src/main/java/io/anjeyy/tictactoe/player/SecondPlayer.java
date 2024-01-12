@@ -1,18 +1,18 @@
 package io.anjeyy.tictactoe.player;
 
-public class SecondPlayer implements Player {
+class SecondPlayer implements Player {
 
-    private final String icon = "O";
+    private static final String ICON = "O";
 
     private SecondPlayer() {
     }
 
-    public static SecondPlayer create() {
+    static SecondPlayer create() {
         return new SecondPlayer();
     }
 
     @Override
     public String icon() {
-        return icon;
+        return ICON;
     }
 }

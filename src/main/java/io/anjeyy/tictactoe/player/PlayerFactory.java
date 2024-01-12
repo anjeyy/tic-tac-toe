@@ -9,4 +9,8 @@ public class PlayerFactory {
     public static Player createFirstPlayer() {
         return FirstPlayer.create();
     }
+
+    public static Player createSecondPlayer() {
+        return SecondPlayer.create();
+    }
 }
