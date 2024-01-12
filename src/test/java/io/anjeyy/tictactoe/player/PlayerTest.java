@@ -15,7 +15,7 @@ class PlayerTest {
 
     @Test
     void testPlayerIcons() {
-        Player firstPlayer = FirstPlayer.create();
+        Player firstPlayer = PlayerFactory.createFirstPlayer();
 
         String actual = firstPlayer.icon();
 
