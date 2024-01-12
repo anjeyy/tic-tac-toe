@@ -1,5 +1,8 @@
-package io.anjeyy.tictactoe;
+package io.anjeyy.tictactoe.player;
 
+import io.anjeyy.tictactoe.player.FirstPlayer;
+import io.anjeyy.tictactoe.player.Player;
+import io.anjeyy.tictactoe.player.SecondPlayer;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -7,7 +10,7 @@ class PlayerTest {
 
     /*
      * TDD list
-     * - player interface
+     * - player factory
      */
 
     @Test

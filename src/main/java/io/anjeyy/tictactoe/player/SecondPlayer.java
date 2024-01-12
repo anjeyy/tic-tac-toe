@@ -1,4 +1,4 @@
-package io.anjeyy.tictactoe;
+package io.anjeyy.tictactoe.player;
 
 public class SecondPlayer implements Player {
 
