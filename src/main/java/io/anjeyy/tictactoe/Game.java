@@ -32,6 +32,22 @@ public class Game {
                 }
             }
         }
+
+        for (int column = 0; column < board[0].length; column++) {
+            String firstColumnCell = board[0][column];
+            if (firstColumnCell == null) {
+                continue;
+            }
+            for (int row = 0; row < board.length; row++) {
+                String currentCell = board[row][column];
+                if (!firstColumnCell.equals(currentCell)) {
+                    break;
+                } else if (row == 2) {
+                    return true;
+                }
+            }
+        }
+
         return false;
     }
 
