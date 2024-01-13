@@ -2,9 +2,12 @@ package io.anjeyy.tictactoe;
 
 import io.anjeyy.tictactoe.player.Player;
 
+import java.util.Optional;
+
 public class Game {
 
     private final String[][] board = new String[3][3];
+    private Player currentPlayersTurn = null;
 
     private Game() {
     }
@@ -76,7 +79,9 @@ public class Game {
     }
 
     public void draw(Player player) {
-        Coordinate coordinate = player.drawingDecision().orElseThrow(() -> new IllegalStateException("Player needs to make a decision where to draw."));
+        Coordinate coordinate =
+            player.drawingDecision()
+                .orElseThrow(() -> new IllegalStateException("Player needs to make a decision where to draw."));
         int row = coordinate.row();
         int column = coordinate.column();
 
@@ -84,5 +89,13 @@ public class Game {
             throw new IllegalArgumentException("Cell is already marked by a player.");
         }
         board[row - 1][column - 1] = player.icon();
+        currentPlayersTurn = player;
+    }
+
+    public Optional<Player> winner() {
+        if (isGameOver()) {
+            return Optional.of(currentPlayersTurn);
+        }
+        return Optional.empty();
     }
 }

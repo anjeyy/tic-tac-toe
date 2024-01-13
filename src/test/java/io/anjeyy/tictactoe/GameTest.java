@@ -7,6 +7,8 @@ import org.assertj.core.api.ThrowableAssert;
 import org.assertj.core.data.Index;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 class GameTest {
 
     @Test
@@ -65,6 +67,12 @@ class GameTest {
             .contains(new String[3], Index.atIndex(2));
         boolean isGameOver = game.isGameOver();
         Assertions.assertThat(isGameOver).isTrue();
+        Optional<Player> winner = game.winner();
+        Assertions.assertThat(winner)
+            .isNotEmpty()
+            .get()
+            .asString()
+            .isEqualTo("Player 1: X");
     }
 
     @Test
@@ -93,6 +101,12 @@ class GameTest {
             .contains(new String[] { "O", "O", null }, Index.atIndex(2));
         boolean isGameOver = game.isGameOver();
         Assertions.assertThat(isGameOver).isTrue();
+        Optional<Player> winner = game.winner();
+        Assertions.assertThat(winner)
+            .isNotEmpty()
+            .get()
+            .asString()
+            .isEqualTo("Player 1: X");
     }
 
     @Test
@@ -121,6 +135,12 @@ class GameTest {
             .contains(new String[] { "X", null, null }, Index.atIndex(2));
         boolean isGameOver = game.isGameOver();
         Assertions.assertThat(isGameOver).isTrue();
+        Optional<Player> winner = game.winner();
+        Assertions.assertThat(winner)
+            .isNotEmpty()
+            .get()
+            .asString()
+            .isEqualTo("Player 1: X");
     }
 
     @Test
@@ -149,6 +169,12 @@ class GameTest {
             .contains(new String[] { null, "X", null }, Index.atIndex(2));
         boolean isGameOver = game.isGameOver();
         Assertions.assertThat(isGameOver).isTrue();
+        Optional<Player> winner = game.winner();
+        Assertions.assertThat(winner)
+            .isNotEmpty()
+            .get()
+            .asString()
+            .isEqualTo("Player 1: X");
     }
 
     @Test
@@ -177,6 +203,29 @@ class GameTest {
             .contains(new String[] { null, null, "X" }, Index.atIndex(2));
         boolean isGameOver = game.isGameOver();
         Assertions.assertThat(isGameOver).isTrue();
+        Optional<Player> winner = game.winner();
+        Assertions.assertThat(winner)
+            .isNotEmpty()
+            .get()
+            .asString()
+            .isEqualTo("Player 1: X");
+    }
+
+    @Test
+    void testWinnerWithoutGameOver() {
+        Game game = Game.start();
+        Player firstPlayer = PlayerFactory.createFirstPlayer();
+        Player secondPlayer = PlayerFactory.createSecondPlayer();
+
+        firstPlayer.decideNextDrawing(1, 1);
+        game.draw(firstPlayer);
+        secondPlayer.decideNextDrawing(1, 3);
+        game.draw(secondPlayer);
+
+        boolean isGameOver = game.isGameOver();
+        Assertions.assertThat(isGameOver).isFalse();
+        Optional<Player> winner = game.winner();
+        Assertions.assertThat(winner).isEmpty();
     }
 
     @Test
@@ -196,7 +245,6 @@ class GameTest {
     }
 
     //memo test drawing after game is over
-    //memo test winner of game
     //memo drawing outside of range - ENUM?
 
 }
