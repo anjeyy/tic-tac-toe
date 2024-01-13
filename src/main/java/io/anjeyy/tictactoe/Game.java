@@ -18,21 +18,10 @@ public class Game {
     }
 
     public boolean isGameOver() {
-        for (int row = 0; row < board.length; row++) {
-            String firstRowCell = board[row][0];
-            if (firstRowCell == null) {
-                continue;
-            }
-            for (int column = 0; column < board[row].length; column++) {
-                String currentCell = board[row][column];
-                if (!firstRowCell.equals(currentCell)) {
-                    break;
-                } else if (column == 2) {
-                    return true;
-                }
-            }
-        }
+        return isRowGameOver() || isColumnGameOver();
+    }
 
+    private boolean isColumnGameOver() {
         for (int column = 0; column < board[0].length; column++) {
             String firstColumnCell = board[0][column];
             if (firstColumnCell == null) {
@@ -47,7 +36,24 @@ public class Game {
                 }
             }
         }
+        return false;
+    }
 
+    private boolean isRowGameOver() {
+        for (int row = 0; row < board.length; row++) {
+            String firstRowCell = board[row][0];
+            if (firstRowCell == null) {
+                continue;
+            }
+            for (int column = 0; column < board[row].length; column++) {
+                String currentCell = board[row][column];
+                if (!firstRowCell.equals(currentCell)) {
+                    break;
+                } else if (column == 2) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
