@@ -8,7 +8,7 @@ public class Game {
 
     private Game() {
     }
- 
+
     public static Game start() {
         return new Game();
     }
@@ -18,17 +18,21 @@ public class Game {
     }
 
     public boolean isGameOver() {
-        String[] firstRow = board[0];
-        String firstRowCell = firstRow[0];
-        if (firstRowCell == null) {
-            return false;
-        }
-        for (String cell : firstRow) {
-            if (!cell.equals(firstRowCell)) {
-                return false;
+        for (int row = 0; row < board.length; row++) {
+            String firstRowCell = board[row][0];
+            if (firstRowCell == null) {
+                continue;
+            }
+            for (int column = 0; column < board[row].length; column++) {
+                String currentCell = board[row][column];
+                if (!firstRowCell.equals(currentCell)) {
+                    break;
+                } else if (column == 2) {
+                    return true;
+                }
             }
         }
-        return true;
+        return false;
     }
 
     public void draw(Player player) {
