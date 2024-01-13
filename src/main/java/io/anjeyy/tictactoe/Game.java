@@ -80,6 +80,9 @@ public class Game {
         int row = coordinate.row();
         int column = coordinate.column();
 
+        if (board[row - 1][column - 1] != null) {
+            throw new IllegalArgumentException("Cell is already marked by a player.");
+        }
         board[row - 1][column - 1] = player.icon();
     }
 }

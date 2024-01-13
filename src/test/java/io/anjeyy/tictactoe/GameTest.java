@@ -179,7 +179,22 @@ class GameTest {
         Assertions.assertThat(isGameOver).isTrue();
     }
 
-    //memo test drawing same cell
+    @Test
+    void testDrawingSameCell() {
+        Game game = Game.start();
+        Player firstPlayer = PlayerFactory.createFirstPlayer();
+        Player secondPlayer = PlayerFactory.createSecondPlayer();
+
+        firstPlayer.decideNextDrawing(1, 1);
+        game.draw(firstPlayer);
+        secondPlayer.decideNextDrawing(1, 1);
+
+        ThrowableAssert.ThrowingCallable expectedThrow = () -> game.draw(secondPlayer);
+        Assertions.assertThatThrownBy(expectedThrow)
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("Cell is already marked by a player.");
+    }
+
     //memo test drawing after game is over
     //memo test winner of game
     //memo drawing outside of range - ENUM?
