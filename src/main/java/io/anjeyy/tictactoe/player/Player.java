@@ -8,7 +8,7 @@ public interface Player {
 
     String icon();
 
-    void decideNextDrawing(int row, int column);
+    void decideNextDrawing(Coordinate.Row row, Coordinate.Column column);
 
     Optional<Coordinate> drawingDecision();
 }

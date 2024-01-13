@@ -12,7 +12,7 @@ abstract class AbstractPlayer implements Player {
     }
 
     @Override
-    public void decideNextDrawing(int row, int column) {
+    public void decideNextDrawing(Coordinate.Row row, Coordinate.Column column) {
         this.nextDrawing = Coordinate.from(row, column);
     }
 

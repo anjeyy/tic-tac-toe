@@ -95,13 +95,13 @@ public class Game {
         }
 
         Coordinate coordinate = player.drawingDecision().orElseThrow(() -> new IllegalStateException("Player needs to make a decision where to draw."));
-        int row = coordinate.row();
-        int column = coordinate.column();
+        int row = coordinate.row().index();
+        int column = coordinate.column().index();
 
-        if (board[row - 1][column - 1] != null) {
+        if (board[row][column] != null) {
             throw new IllegalArgumentException("Cell is already marked by a player.");
         }
-        board[row - 1][column - 1] = player.icon();
+        board[row][column] = player.icon();
         currentPlayersTurn = player;
     }
 

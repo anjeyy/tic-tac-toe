@@ -47,17 +47,17 @@ class GameTest {
         Player firstPlayer = PlayerFactory.createFirstPlayer();
         Player secondPlayer = PlayerFactory.createSecondPlayer();
 
-        firstPlayer.decideNextDrawing(1, 1);
+        firstPlayer.decideNextDrawing(Coordinate.Row._1, Coordinate.Column._1);
         game.draw(firstPlayer);
-        secondPlayer.decideNextDrawing(2, 1);
+        secondPlayer.decideNextDrawing(Coordinate.Row._2, Coordinate.Column._1);
         game.draw(secondPlayer);
 
-        firstPlayer.decideNextDrawing(1, 2);
+        firstPlayer.decideNextDrawing(Coordinate.Row._1, Coordinate.Column._2);
         game.draw(firstPlayer);
-        secondPlayer.decideNextDrawing(2, 2);
+        secondPlayer.decideNextDrawing(Coordinate.Row._2, Coordinate.Column._2);
         game.draw(secondPlayer);
 
-        firstPlayer.decideNextDrawing(1, 3);
+        firstPlayer.decideNextDrawing(Coordinate.Row._1, Coordinate.Column._3);
         game.draw(firstPlayer);
 
         String[][] actual = game.showBoard();
@@ -81,17 +81,17 @@ class GameTest {
         Player firstPlayer = PlayerFactory.createFirstPlayer();
         Player secondPlayer = PlayerFactory.createSecondPlayer();
 
-        firstPlayer.decideNextDrawing(1, 2);
+        firstPlayer.decideNextDrawing(Coordinate.Row._1, Coordinate.Column._2);
         game.draw(firstPlayer);
-        secondPlayer.decideNextDrawing(1, 3);
+        secondPlayer.decideNextDrawing(Coordinate.Row._1, Coordinate.Column._3);
         game.draw(secondPlayer);
 
-        firstPlayer.decideNextDrawing(2, 2);
+        firstPlayer.decideNextDrawing(Coordinate.Row._2, Coordinate.Column._2);
         game.draw(firstPlayer);
-        secondPlayer.decideNextDrawing(2, 3);
+        secondPlayer.decideNextDrawing(Coordinate.Row._2, Coordinate.Column._3);
         game.draw(secondPlayer);
 
-        firstPlayer.decideNextDrawing(3, 2);
+        firstPlayer.decideNextDrawing(Coordinate.Row._3, Coordinate.Column._2);
         game.draw(firstPlayer);
 
         String[][] actual = game.showBoard();
@@ -115,9 +115,9 @@ class GameTest {
         Player firstPlayer = PlayerFactory.createFirstPlayer();
         Player secondPlayer = PlayerFactory.createSecondPlayer();
 
-        firstPlayer.decideNextDrawing(1, 1);
+        firstPlayer.decideNextDrawing(Coordinate.Row._1, Coordinate.Column._1);
         game.draw(firstPlayer);
-        secondPlayer.decideNextDrawing(1, 3);
+        secondPlayer.decideNextDrawing(Coordinate.Row._1, Coordinate.Column._3);
         game.draw(secondPlayer);
 
         boolean isGameOver = game.isGameOver();
@@ -132,9 +132,9 @@ class GameTest {
         Player firstPlayer = PlayerFactory.createFirstPlayer();
         Player secondPlayer = PlayerFactory.createSecondPlayer();
 
-        firstPlayer.decideNextDrawing(1, 1);
+        firstPlayer.decideNextDrawing(Coordinate.Row._1, Coordinate.Column._1);
         game.draw(firstPlayer);
-        secondPlayer.decideNextDrawing(1, 1);
+        secondPlayer.decideNextDrawing(Coordinate.Row._1, Coordinate.Column._1);
 
         ThrowableAssert.ThrowingCallable expectedThrow = () -> game.draw(secondPlayer);
         Assertions.assertThatThrownBy(expectedThrow)
@@ -148,19 +148,19 @@ class GameTest {
         Player firstPlayer = PlayerFactory.createFirstPlayer();
         Player secondPlayer = PlayerFactory.createSecondPlayer();
 
-        firstPlayer.decideNextDrawing(1, 1);
+        firstPlayer.decideNextDrawing(Coordinate.Row._1, Coordinate.Column._1);
         game.draw(firstPlayer);
-        secondPlayer.decideNextDrawing(1, 3);
+        secondPlayer.decideNextDrawing(Coordinate.Row._1, Coordinate.Column._3);
         game.draw(secondPlayer);
 
-        firstPlayer.decideNextDrawing(2, 2);
+        firstPlayer.decideNextDrawing(Coordinate.Row._2, Coordinate.Column._2);
         game.draw(firstPlayer);
-        secondPlayer.decideNextDrawing(2, 3);
+        secondPlayer.decideNextDrawing(Coordinate.Row._2, Coordinate.Column._3);
         game.draw(secondPlayer);
 
-        firstPlayer.decideNextDrawing(3, 3);
+        firstPlayer.decideNextDrawing(Coordinate.Row._3, Coordinate.Column._3);
         game.draw(firstPlayer);
-        secondPlayer.decideNextDrawing(1, 2);
+        secondPlayer.decideNextDrawing(Coordinate.Row._1, Coordinate.Column._2);
 
         ThrowableAssert.ThrowingCallable expectedThrow = () -> game.draw(secondPlayer);
         Assertions.assertThatThrownBy(expectedThrow)
@@ -182,27 +182,27 @@ class GameTest {
         Player firstPlayer = PlayerFactory.createFirstPlayer();
         Player secondPlayer = PlayerFactory.createSecondPlayer();
 
-        firstPlayer.decideNextDrawing(1, 1);
+        firstPlayer.decideNextDrawing(Coordinate.Row._1, Coordinate.Column._1);
         game.draw(firstPlayer);
-        secondPlayer.decideNextDrawing(2, 2);
+        secondPlayer.decideNextDrawing(Coordinate.Row._2, Coordinate.Column._2);
         game.draw(secondPlayer);
 
-        firstPlayer.decideNextDrawing(1, 2);
+        firstPlayer.decideNextDrawing(Coordinate.Row._1, Coordinate.Column._2);
         game.draw(firstPlayer);
-        secondPlayer.decideNextDrawing(1, 3);
+        secondPlayer.decideNextDrawing(Coordinate.Row._1, Coordinate.Column._3);
         game.draw(secondPlayer);
 
-        firstPlayer.decideNextDrawing(3, 1);
+        firstPlayer.decideNextDrawing(Coordinate.Row._3, Coordinate.Column._1);
         game.draw(firstPlayer);
-        secondPlayer.decideNextDrawing(2, 1);
+        secondPlayer.decideNextDrawing(Coordinate.Row._2, Coordinate.Column._1);
         game.draw(secondPlayer);
 
-        firstPlayer.decideNextDrawing(2, 3);
+        firstPlayer.decideNextDrawing(Coordinate.Row._2, Coordinate.Column._3);
         game.draw(firstPlayer);
-        secondPlayer.decideNextDrawing(3, 2);
+        secondPlayer.decideNextDrawing(Coordinate.Row._3, Coordinate.Column._2);
         game.draw(secondPlayer);
 
-        firstPlayer.decideNextDrawing(3, 3);
+        firstPlayer.decideNextDrawing(Coordinate.Row._3, Coordinate.Column._3);
         game.draw(firstPlayer);
 
         String[][] actual = game.showBoard();
@@ -215,7 +215,7 @@ class GameTest {
         Optional<Player> winner = game.winner();
         Assertions.assertThat(winner).isEmpty();
 
-        secondPlayer.decideNextDrawing(3, 2);
+        secondPlayer.decideNextDrawing(Coordinate.Row._3, Coordinate.Column._2);
         ThrowableAssert.ThrowingCallable expectedThrow = () -> game.draw(secondPlayer);
         Assertions.assertThatThrownBy(expectedThrow)
             .isInstanceOf(IllegalCallerException.class)
