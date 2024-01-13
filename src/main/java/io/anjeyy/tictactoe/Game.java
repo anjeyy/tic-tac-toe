@@ -2,15 +2,13 @@ package io.anjeyy.tictactoe;
 
 import io.anjeyy.tictactoe.player.Player;
 
-import java.util.Optional;
-
 public class Game {
 
     private final String[][] board = new String[3][3];
 
     private Game() {
     }
-
+ 
     public static Game start() {
         return new Game();
     }

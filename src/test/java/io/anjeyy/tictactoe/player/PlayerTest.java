@@ -1,8 +1,5 @@
 package io.anjeyy.tictactoe.player;
 
-import io.anjeyy.tictactoe.player.FirstPlayer;
-import io.anjeyy.tictactoe.player.Player;
-import io.anjeyy.tictactoe.player.SecondPlayer;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
