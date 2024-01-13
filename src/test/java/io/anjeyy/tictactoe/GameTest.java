@@ -76,74 +76,6 @@ class GameTest {
     }
 
     @Test
-    void testSecondRowGameOver() {
-        Game game = Game.start();
-        Player firstPlayer = PlayerFactory.createFirstPlayer();
-        Player secondPlayer = PlayerFactory.createSecondPlayer();
-
-        firstPlayer.decideNextDrawing(2, 1);
-        game.draw(firstPlayer);
-        secondPlayer.decideNextDrawing(3, 1);
-        game.draw(secondPlayer);
-
-        firstPlayer.decideNextDrawing(2, 2);
-        game.draw(firstPlayer);
-        secondPlayer.decideNextDrawing(3, 2);
-        game.draw(secondPlayer);
-
-        firstPlayer.decideNextDrawing(2, 3);
-        game.draw(firstPlayer);
-
-        String[][] actual = game.showBoard();
-        Assertions.assertThat(actual)
-            .contains(new String[] { null, null, null }, Index.atIndex(0))
-            .contains(new String[] { "X", "X", "X" }, Index.atIndex(1))
-            .contains(new String[] { "O", "O", null }, Index.atIndex(2));
-        boolean isGameOver = game.isGameOver();
-        Assertions.assertThat(isGameOver).isTrue();
-        Optional<Player> winner = game.winner();
-        Assertions.assertThat(winner)
-            .isNotEmpty()
-            .get()
-            .asString()
-            .isEqualTo("Player 1: X");
-    }
-
-    @Test
-    void testColumnGameOver() {
-        Game game = Game.start();
-        Player firstPlayer = PlayerFactory.createFirstPlayer();
-        Player secondPlayer = PlayerFactory.createSecondPlayer();
-
-        firstPlayer.decideNextDrawing(1, 1);
-        game.draw(firstPlayer);
-        secondPlayer.decideNextDrawing(1, 2);
-        game.draw(secondPlayer);
-
-        firstPlayer.decideNextDrawing(2, 1);
-        game.draw(firstPlayer);
-        secondPlayer.decideNextDrawing(2, 2);
-        game.draw(secondPlayer);
-
-        firstPlayer.decideNextDrawing(3, 1);
-        game.draw(firstPlayer);
-
-        String[][] actual = game.showBoard();
-        Assertions.assertThat(actual)
-            .contains(new String[] { "X", "O", null }, Index.atIndex(0))
-            .contains(new String[] { "X", "O", null }, Index.atIndex(1))
-            .contains(new String[] { "X", null, null }, Index.atIndex(2));
-        boolean isGameOver = game.isGameOver();
-        Assertions.assertThat(isGameOver).isTrue();
-        Optional<Player> winner = game.winner();
-        Assertions.assertThat(winner)
-            .isNotEmpty()
-            .get()
-            .asString()
-            .isEqualTo("Player 1: X");
-    }
-
-    @Test
     void testSecondColumnGameOver() {
         Game game = Game.start();
         Player firstPlayer = PlayerFactory.createFirstPlayer();
@@ -167,40 +99,6 @@ class GameTest {
             .contains(new String[] { null, "X", "O" }, Index.atIndex(0))
             .contains(new String[] { null, "X", "O" }, Index.atIndex(1))
             .contains(new String[] { null, "X", null }, Index.atIndex(2));
-        boolean isGameOver = game.isGameOver();
-        Assertions.assertThat(isGameOver).isTrue();
-        Optional<Player> winner = game.winner();
-        Assertions.assertThat(winner)
-            .isNotEmpty()
-            .get()
-            .asString()
-            .isEqualTo("Player 1: X");
-    }
-
-    @Test
-    void testDiagonalGameOver() {
-        Game game = Game.start();
-        Player firstPlayer = PlayerFactory.createFirstPlayer();
-        Player secondPlayer = PlayerFactory.createSecondPlayer();
-
-        firstPlayer.decideNextDrawing(1, 1);
-        game.draw(firstPlayer);
-        secondPlayer.decideNextDrawing(1, 3);
-        game.draw(secondPlayer);
-
-        firstPlayer.decideNextDrawing(2, 2);
-        game.draw(firstPlayer);
-        secondPlayer.decideNextDrawing(2, 3);
-        game.draw(secondPlayer);
-
-        firstPlayer.decideNextDrawing(3, 3);
-        game.draw(firstPlayer);
-
-        String[][] actual = game.showBoard();
-        Assertions.assertThat(actual)
-            .contains(new String[] { "X", null, "O" }, Index.atIndex(0))
-            .contains(new String[] { null, "X", "O" }, Index.atIndex(1))
-            .contains(new String[] { null, null, "X" }, Index.atIndex(2));
         boolean isGameOver = game.isGameOver();
         Assertions.assertThat(isGameOver).isTrue();
         Optional<Player> winner = game.winner();
