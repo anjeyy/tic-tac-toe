@@ -151,6 +151,34 @@ class GameTest {
         Assertions.assertThat(isGameOver).isTrue();
     }
 
+    @Test
+    void testDiagonalGameOver() {
+        Game game = Game.start();
+        Player firstPlayer = PlayerFactory.createFirstPlayer();
+        Player secondPlayer = PlayerFactory.createSecondPlayer();
+
+        firstPlayer.decideNextDrawing(1, 1);
+        game.draw(firstPlayer);
+        secondPlayer.decideNextDrawing(1, 3);
+        game.draw(secondPlayer);
+
+        firstPlayer.decideNextDrawing(2, 2);
+        game.draw(firstPlayer);
+        secondPlayer.decideNextDrawing(2, 3);
+        game.draw(secondPlayer);
+
+        firstPlayer.decideNextDrawing(3, 3);
+        game.draw(firstPlayer);
+
+        String[][] actual = game.showBoard();
+        Assertions.assertThat(actual)
+            .contains(new String[] { "X", null, "O" }, Index.atIndex(0))
+            .contains(new String[] { null, "X", "O" }, Index.atIndex(1))
+            .contains(new String[] { null, null, "X" }, Index.atIndex(2));
+        boolean isGameOver = game.isGameOver();
+        Assertions.assertThat(isGameOver).isTrue();
+    }
+
     //memo test drawing same cell
     //memo test drawing after game is over
     //memo test winner of game

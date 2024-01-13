@@ -18,7 +18,25 @@ public class Game {
     }
 
     public boolean isGameOver() {
-        return isRowGameOver() || isColumnGameOver();
+        return isRowGameOver() || isColumnGameOver() || isDiagonalGameOver();
+    }
+
+    private boolean isRowGameOver() {
+        for (int row = 0; row < board.length; row++) {
+            String firstRowCell = board[row][0];
+            if (firstRowCell == null) {
+                continue;
+            }
+            for (int column = 0; column < board[row].length; column++) {
+                String currentCell = board[row][column];
+                if (!firstRowCell.equals(currentCell)) {
+                    break;
+                } else if (column == 2) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private boolean isColumnGameOver() {
@@ -39,20 +57,20 @@ public class Game {
         return false;
     }
 
-    private boolean isRowGameOver() {
-        for (int row = 0; row < board.length; row++) {
-            String firstRowCell = board[row][0];
-            if (firstRowCell == null) {
-                continue;
+    private boolean isDiagonalGameOver() {
+        String firstLeftDiagonalCell = board[0][0];
+        String firstRightDiagonalCell = board[0][2];
+        if (firstLeftDiagonalCell != null) {
+            String secondLeftDiagonalCell = board[1][1];
+            String thirdLeftDiagonalCell = board[2][2];
+            if (firstLeftDiagonalCell.equals(secondLeftDiagonalCell) && firstLeftDiagonalCell.equals(thirdLeftDiagonalCell)) {
+                return true;
             }
-            for (int column = 0; column < board[row].length; column++) {
-                String currentCell = board[row][column];
-                if (!firstRowCell.equals(currentCell)) {
-                    break;
-                } else if (column == 2) {
-                    return true;
-                }
-            }
+        }
+        if (firstRightDiagonalCell != null) {
+            String secondRightDiagonalCell = board[1][1];
+            String thirdRightDiagonalCell = board[2][0];
+            return firstRightDiagonalCell.equals(secondRightDiagonalCell) && firstRightDiagonalCell.equals(thirdRightDiagonalCell);
         }
         return false;
     }
