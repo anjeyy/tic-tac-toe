@@ -176,9 +176,52 @@ class GameTest {
             .isEqualTo("Player 1: X");
     }
 
+    @Test
+    void testDrawingWithoutWinner() {
+        Game game = Game.start();
+        Player firstPlayer = PlayerFactory.createFirstPlayer();
+        Player secondPlayer = PlayerFactory.createSecondPlayer();
+
+        firstPlayer.decideNextDrawing(1, 1);
+        game.draw(firstPlayer);
+        secondPlayer.decideNextDrawing(2, 2);
+        game.draw(secondPlayer);
+
+        firstPlayer.decideNextDrawing(1, 2);
+        game.draw(firstPlayer);
+        secondPlayer.decideNextDrawing(1, 3);
+        game.draw(secondPlayer);
+
+        firstPlayer.decideNextDrawing(3, 1);
+        game.draw(firstPlayer);
+        secondPlayer.decideNextDrawing(2, 1);
+        game.draw(secondPlayer);
+
+        firstPlayer.decideNextDrawing(2, 3);
+        game.draw(firstPlayer);
+        secondPlayer.decideNextDrawing(3, 2);
+        game.draw(secondPlayer);
+
+        firstPlayer.decideNextDrawing(3, 3);
+        game.draw(firstPlayer);
+
+        String[][] actual = game.showBoard();
+        Assertions.assertThat(actual)
+            .contains(new String[] { "X", "X", "O" }, Index.atIndex(0))
+            .contains(new String[] { "O", "O", "X" }, Index.atIndex(1))
+            .contains(new String[] { "X", "O", "X" }, Index.atIndex(2));
+        boolean isGameOver = game.isGameOver();
+        Assertions.assertThat(isGameOver).isTrue();
+        Optional<Player> winner = game.winner();
+        Assertions.assertThat(winner).isEmpty();
+
+        secondPlayer.decideNextDrawing(3, 2);
+        ThrowableAssert.ThrowingCallable expectedThrow = () -> game.draw(secondPlayer);
+        Assertions.assertThatThrownBy(expectedThrow)
+            .isInstanceOf(IllegalCallerException.class)
+            .hasMessage("Game is over. Create a new game.");
+    }
+
     //memo drawing outside of range - ENUM?
-    //memo all fields taken
-    //memo all fields taken - (without winner)
-    //memo tie
 
 }

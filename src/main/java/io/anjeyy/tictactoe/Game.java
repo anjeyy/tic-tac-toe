@@ -21,7 +21,7 @@ public class Game {
     }
 
     public boolean isGameOver() {
-        return isRowGameOver() || isColumnGameOver() || isDiagonalGameOver();
+        return isRowGameOver() || isColumnGameOver() || isDiagonalGameOver() || isBoardFull();
     }
 
     private boolean isRowGameOver() {
@@ -78,14 +78,23 @@ public class Game {
         return false;
     }
 
+    private boolean isBoardFull() {
+        for (String[] rows : board) {
+            for (String currentCell : rows) {
+                if (currentCell == null) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public void draw(Player player) {
         if (isGameOver()) {
             throw new IllegalCallerException("Game is over. Create a new game.");
         }
 
-        Coordinate coordinate =
-            player.drawingDecision()
-                .orElseThrow(() -> new IllegalStateException("Player needs to make a decision where to draw."));
+        Coordinate coordinate = player.drawingDecision().orElseThrow(() -> new IllegalStateException("Player needs to make a decision where to draw."));
         int row = coordinate.row();
         int column = coordinate.column();
 
@@ -97,7 +106,7 @@ public class Game {
     }
 
     public Optional<Player> winner() {
-        if (isGameOver()) {
+        if (isGameOver() && !isBoardFull()) {
             return Optional.of(currentPlayersTurn);
         }
         return Optional.empty();
