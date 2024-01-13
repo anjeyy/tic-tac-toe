@@ -244,7 +244,43 @@ class GameTest {
             .hasMessage("Cell is already marked by a player.");
     }
 
-    //memo test drawing after game is over
+    @Test
+    void testDrawingAfterGameOver() {
+        Game game = Game.start();
+        Player firstPlayer = PlayerFactory.createFirstPlayer();
+        Player secondPlayer = PlayerFactory.createSecondPlayer();
+
+        firstPlayer.decideNextDrawing(1, 1);
+        game.draw(firstPlayer);
+        secondPlayer.decideNextDrawing(1, 3);
+        game.draw(secondPlayer);
+
+        firstPlayer.decideNextDrawing(2, 2);
+        game.draw(firstPlayer);
+        secondPlayer.decideNextDrawing(2, 3);
+        game.draw(secondPlayer);
+
+        firstPlayer.decideNextDrawing(3, 3);
+        game.draw(firstPlayer);
+        secondPlayer.decideNextDrawing(1, 2);
+
+        ThrowableAssert.ThrowingCallable expectedThrow = () -> game.draw(secondPlayer);
+        Assertions.assertThatThrownBy(expectedThrow)
+            .isInstanceOf(IllegalCallerException.class)
+            .hasMessage("Game is over. Create a new game.");
+        boolean isGameOver = game.isGameOver();
+        Assertions.assertThat(isGameOver).isTrue();
+        Optional<Player> winner = game.winner();
+        Assertions.assertThat(winner)
+            .isNotEmpty()
+            .get()
+            .asString()
+            .isEqualTo("Player 1: X");
+    }
+
     //memo drawing outside of range - ENUM?
+    //memo all fields taken
+    //memo all fields taken - (without winner)
+    //memo tie
 
 }

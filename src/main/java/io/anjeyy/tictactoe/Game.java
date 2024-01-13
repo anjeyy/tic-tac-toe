@@ -79,6 +79,10 @@ public class Game {
     }
 
     public void draw(Player player) {
+        if (isGameOver()) {
+            throw new IllegalCallerException("Game is over. Create a new game.");
+        }
+
         Coordinate coordinate =
             player.drawingDecision()
                 .orElseThrow(() -> new IllegalStateException("Player needs to make a decision where to draw."));
